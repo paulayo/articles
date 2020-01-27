@@ -8,7 +8,7 @@ Bootstrap
 JQuery
 
 
-Content Structure:
+Tutorial Structure:
 Introduction to Angular and NG Bootstrap
 Note on Responsive web layout
 Set up IDE
@@ -18,3 +18,14 @@ Explain teh Bootstrap classes Used
 Create Another Navbar template code with Search at the top 
 Explain the Bootstrap classes Used
 Conclude the tutorial
+
+Content Structure:
+How it works
+Basic Example
+Navbar with Search bar
+Navbar with Icons
+Navbar with icons on right
+Navbar with image dropdown and icon
+Custom content in navbar
+Color Schemes or varieties
+Supported Content
