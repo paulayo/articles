@@ -1,0 +1,20 @@
+Build your Navbar/Menu in Angular with NG Bootstrap
+
+Packages:
+Angular
+FontAwesome
+NG Bootstrap
+Bootstrap
+JQuery
+
+
+Content Structure:
+Introduction to Angular and NG Bootstrap
+Note on Responsive web layout
+Set up IDE
+Create Module FontAwesome, NG Bootstrap
+Create Navbar Template Code
+Explain teh Bootstrap classes Used
+Create Another Navbar template code with Search at the top 
+Explain the Bootstrap classes Used
+Conclude the tutorial
