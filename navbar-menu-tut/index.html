@@ -1,87 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Build your navbar/menu in Angular with NgBootstrap</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Build your navbar/menu in Angular with NgBootstrap</title>
 </head>
-<body>
-    <div class="container">
-        <img src="" />
-        <section id="content-table">
-            <header>Content Structure</header>
-            <ul>
-                <a href="#intro"><li>Introduction to Angular and NG Bootstrap</li></a>
-                <a href="#resp-layout"><li id="resp-layout">Responsive web layout</li></a>
-                <a href="#setup-environ"><li>Set up Project Environment</li></a>
-                <a href="#module-pattern"><li>Create Module FontAwesome, NG Bootstrap</li></a>
-                <a href="#code"><li>Create Navbar Template Code</li></a>
-                <a href="#bootstrap-explained"><li>Bootstrap classes Used</li></a>
-                <a href="#conclusion"><li>Conclude the tutorial</li></a>
-            </ul>
-            <article>
-                
-            </article>
 
-        </section>
-        <section id="intro">
-            <div>
-                <header>XXX</header>
-                <article>
+<body class="container">
+  <div class="row">
+    <img src="" />
+    <section id="content-table">
+      <header>Content Structure</header>
+      <ul>
+        <a href="#intro">
+          <li>Introduction to Angular and NG Bootstrap</li>
+        </a>
+        <a href="#setup-environ">
+          <li>Set up Project Environment</li>
+        </a>
+        <a href="#module-pattern">
+          <li>Create Module FontAwesome, NG Bootstrap</li>
+        </a>
+        <a href="#code">
+          <li>Create Navbar Template Code</li>
+        </a>
+        <a href="#bootstrap-explained">
+          <li>Bootstrap classes Used</li>
+        </a>
+        <a href="#conclusion">
+          <li>Conclude the tutorial</li>
+        </a>
+      </ul>
+      <article></article>
+    </section>
+    <section id="intro">
+      <div>
+        <header>XXX</header>
+        <article>
+          <p>
+            In this Angular 8 tutorial, we'll learn to build an Angular
+            Navbar/Menu using NG Bootstrap The aim of the tutorial is to
+            explore the abilities embedded in the ng bootstrap in making our
+            nav/menu responsive and user friendly for navigational purposes.
+          </p>
+        </article>
+      </div>
+    </section>
 
-                </article>
-            </div>
-        </section>
-        <section id="resp-layout">
-            <div>
-                <header>XXX</header>
-                <article>
-                    <p></p>
-                </article>
-            </div>
-        </section>
-        <section id="setup-environ">
-            <div>
-                <header>XXX</header>
-                <article>
+    <section id="setup-environ">
+      <div>
+        <header class="navbar-brand">Setup Project Environment</header>
+        <article>
+          <div class="terminal">
+            <pre>$ ng new ng-tuty --skip-install</pre>
+          </div>
+          <p>
+            This command will create the angular project without installing our
+            dependencies
+          </p>
+          <div class="warning">
+            <aside>
+              <p>
+                <strong>Note:</strong>
+                You can choose to run <strong>ng new ng-tuty</strong> and your
+                dependencies will get installed along the project
+                initialization. Your packages will them be installed using
+                NPM. With the method above I choose to use yarn in this
+                tutorial.
+              </p>
+            </aside>
+          </div>
 
-                </article>
-            </div>
-        </section>
-        <section id="module-pattern">
-            <div>
-                <header>XXX</header>
-                <article>
+          <div class="terminal">
+            <pre>
+// Start the project using yarn
+$ yarn init
+$ yarn install</pre>
+          </div>
+          <p>
+            Running <strong>yarn init</strong> will initialize our project to
+            use yarn and generate for us yarn.lock file
+          </p>
 
-                </article>
-            </div>
-        </section>
-        <section id="code">
-            <div>
-                <header>XXX</header>
-                <article>
+          <div class="terminal">
+            <pre>$ yarn add bootstrap</pre>
+          </div>
 
-                </article>
-            </div>
-        </section>
-        <section id="bootstrap-explained">
-            <div>
-                <header>XXX</header>
-                <article>
+          <div class="terminal">
+            <pre>
+$ yarn add @fortawesome/fontawesome-svg-core  @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome@0.5.0</pre>
+          </div>
 
-                </article>
-            </div>
-        </section>
-        <section id="conclusion">
-            <div>
-                <header>XXX</header>
-                <article>
+          <div class="terminal">
+            <pre>$ yarn start</pre>
+          </div>
+          <p></p>
+        </article>
+      </div>
+    </section>
+    <section id="module-pattern">
+      <div>
+        <header class="navbar-brand">
+          Configure NG Bootstrap and Angular FontAwesome
+        </header>
+        <article>
+          <header class="h5">NG Bootsrap</header>
+          <div class="terminal">
+            <pre>"styles": [
+"node_modules/bootstrap/dist/css/bootstrap.min.css"
+]</pre>
+          </div>
 
-                </article>
-            </div>
-        </section>
-
-    </div>
+          <div class="terminal">
+            <pre>import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';</pre>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section id="code">
+      <div>
+        <header>XXX</header>
+        <article></article>
+      </div>
+    </section>
+    <section id="bootstrap-explained">
+      <div>
+        <header>XXX</header>
+        <article></article>
+      </div>
+    </section>
+    <section id="conclusion">
+      <div>
+        <header>XXX</header>
+        <article></article>
+      </div>
+    </section>
+  </div>
 </body>
+
 </html>
