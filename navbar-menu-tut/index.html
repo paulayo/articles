@@ -13,7 +13,7 @@
 
 <body class="container">
   <div class="row">
-    <img src="" />
+    <img src="" class="img-fluid" />
     <section id="content-table">
       <header>Content Structure</header>
       <ul>
@@ -68,7 +68,7 @@
               <p>
                 <strong>Note:</strong>
                 You can choose to run <strong>ng new ng-tuty</strong> and your
-                dependencies will get installed along the project
+                dependencies will get installed alongside the project
                 initialization. Your packages will them be installed using
                 NPM. With the method above I choose to use yarn in this
                 tutorial.
@@ -94,6 +94,7 @@ $ yarn install</pre>
           <div class="terminal">
             <pre>
 $ yarn add @fortawesome/fontawesome-svg-core  @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome@0.5.0</pre>
+            <pre>$ yarn add @fortawesome/free-regular-svg-icons @fortawesome/free-brands-svg-icons</pre>
           </div>
 
           <div class="terminal">
@@ -109,37 +110,329 @@ $ yarn add @fortawesome/fontawesome-svg-core  @fortawesome/free-solid-svg-icons 
           Configure NG Bootstrap and Angular FontAwesome
         </header>
         <article>
-          <header class="h5">NG Bootsrap</header>
           <div class="terminal">
             <pre>"styles": [
-"node_modules/bootstrap/dist/css/bootstrap.min.css"
+"src/styles.scss",
+"node_modules/font-awesome/scss/font-awesome.scss",
+"node_modules/bootstrap/scss/bootstrap.scss"
 ]</pre>
           </div>
-
+          <div class="terminal">
+            <pre>$ ng g m core/ng-bootstrap -m core.module
+$ ng g m core/font-awesome -m core.module</pre>
+          </div>
           <div class="terminal">
             <pre>import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';</pre>
           </div>
         </article>
+        <article>
+          <div class="terminal">
+            <pre>
+import { NgModule, Optional, SkipSelf } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { EnsureModuleLoadedOnceGuard } from "../ensure-module-loaded-once.guard";
+
+import { faClosedCaptioning as farClosedCaptioning} from "@fortawesome/free-regular-svg-icons";
+import {
+  faSearch as fasSearch,
+  faWindowClose as fasWindowClose,
+  faShoppingBag as fasShoppingBag,
+  faBars as fasBars
+} from "@fortawesome/free-solid-svg-icons";
+import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+
+@NgModule({
+  declarations: [],
+  imports: [CommonModule, FontAwesomeModule],
+  exports: [FontAwesomeModule]
+})
+export class FortAwesomeModule extends EnsureModuleLoadedOnceGuard {
+  constructor(
+    // some bug here detected
+    @Optional() @SkipSelf() parentModule: FortAwesomeModule,
+    library: FaIconLibrary
+  ) {
+    super(parentModule);
+    library.addIcons(
+      fasSearch,
+      fasWindowClose,
+      farClosedCaptioning,
+      fasShoppingBag,
+      fasBars
+    );
+  }
+}
+
+            </pre>
+          </div>
+        </article>
+        <article>
+          <div class="terminal">
+            <pre>import { NgModule, Optional, SkipSelf } from '@angular/core';
+              import { CommonModule } from '@angular/common';
+              import { EnsureModuleLoadedOnceGuard } from '../ensure-module-loaded-once.guard';
+              
+              import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+              
+              
+              @NgModule({
+                declarations: [],
+                imports: [
+                  CommonModule,
+                  NgbModule
+                ],
+                exports: [NgbModule]
+              })
+              export class NgBootstrapModule extends EnsureModuleLoadedOnceGuard{
+              
+                constructor(@Optional() @SkipSelf() parentModule: NgBootstrapModule) {
+                  super(parentModule);
+                }
+              }
+              </pre>
+          </div>
+        </article>
+        <article>
+          <div class="terminal">
+            <pre>import { NgModule, Optional, SkipSelf } from '@angular/core';
+              import { CommonModule } from '@angular/common';
+              import { EnsureModuleLoadedOnceGuard } from './ensure-module-loaded-once.guard';
+              import { FortAwesomeModule } from './font-awesome/font-awesome.module';
+              import { NgBootstrapModule } from './ng-bootstrap/ng-bootstrap.module';
+              
+              
+              
+              @NgModule({
+                declarations: [],
+                imports: [
+                  CommonModule,
+                  FortAwesomeModule,
+                  NgBootstrapModule
+                ],
+                exports: [
+                  FortAwesomeModule,
+                  NgBootstrapModule
+                ]
+              })
+              export class CoreModule extends EnsureModuleLoadedOnceGuard {
+                // Ensure that CoreModule is only loaded into AppModule
+              
+                // Looks for the module in the parent injector to see if it's already been loaded (only want it loaded once)
+                constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+                  super(parentModule);
+                }
+              }
+              </pre>
+          </div>
+        </article>
+        <article>
+          <div class="terminal">
+            <pre>import { CoreModule } from './core/core.module';
+
+
+imports: [
+   ...,
+    CoreModule
+  ],
+            </pre>
+          </div>
+        </article>
       </div>
     </section>
+
     <section id="code">
-      <div>
-        <header>XXX</header>
-        <article></article>
+      <header>Let's get our hands dirty</header>
+      <article>
+        <div class="terminal">
+          <pre>$ ng g c navbar</pre>
+        </div>
+
+        <div class="terminal">
+
+          <pre>$ ng g m core -m app.module</pre>
+        </div>
+  </div>
+
+  <xmp>
+    <nav class="navbar navbar-expand-lg py-2">
+      <a id="brand" class="navbar-brand hvr-underline-from-center px-3 mr-5" href="#">SHOPMATE</a>
+      <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed"
+        [attr.aria-expanded]="isMenuCollapsed" aria-controls="navbarItem">
+        <fa-icon [icon]="['fas', 'bars']" [styles]="{ color: 'white' }"></fa-icon>
+      </button>
+      <div id="navbarItem" class="nav justify-content-md-center
+      align-items-center collapse navbar-collapse" [ngbCollapse]="isMenuCollapsed">
+        <ul ngbNav class="navbar-nav nav-width
+    justify-content-sm-around align-items-center mr-3 order-1 order-lg-0">
+          <li class="nav-item active">
+            <a class="ngbNavLink nav-link hvr-underline-from-center" href="#">Women <span
+                class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="ngbNavLink nav-link   hvr-underline-from-center" href="#">Men</a>
+          </li>
+          <li class="nav-item">
+            <a class="ngbNavLink nav-link  hvr-underline-from-center" href="#">Kids</a>
+          </li>
+          <li class="nav-item">
+            <a class="ngbNavLink nav-link  hvr-underline-from-center" href="#">Shoes</a>
+          </li>
+          <li class="nav-item">
+            <a class="ngbNavLink nav-link  hvr-underline-from-center" href="#">Brands</a>
+          </li>
+        </ul>
+        <div id="search-container" class="input-group
+                justify-content-center col-lg-4 col-10 order-0">
+          <span class="input-group-prepend align-self-center mr-n4">
+            <fa-icon [icon]="['fas', 'search']" [classes]="['text-light ']"></fa-icon>
+          </span>
+          <input class="form-control col-lg-10 col-sm-5 col-9 rounded-pill bg-transparent" type="search"
+            placeholder="search anything" />
+
+          <span class="input-group-append search-close">
+            <fa-icon [icon]="['fas', 'window-close']" [styles]="{
+                        color: '#f62f5e',
+                        'background-color': 'white'
+                      }"></fa-icon>
+          </span>
+        </div>
+        <div id="shopping-bag" class="shopping-bag">
+          <span>
+            <fa-layers size="3x">
+              <fa-icon [icon]="['fas', 'shopping-bag']" [styles]="{
+                          width: '0.4em',
+                          stroke: 'white',
+                          'stroke-width': '30px',
+                          color: '#f62f5e'
+                        }"></fa-icon>
+              <fa-layers-counter content="6" [styles]="{
+                          color: '#f62f5e',
+                          'background-color': 'white',
+                          right: '0.2em'
+                        }"></fa-layers-counter>
+            </fa-layers>
+          </span>
+        </div>
       </div>
-    </section>
-    <section id="bootstrap-explained">
-      <div>
-        <header>XXX</header>
-        <article></article>
-      </div>
-    </section>
-    <section id="conclusion">
-      <div>
-        <header>XXX</header>
-        <article></article>
-      </div>
-    </section>
+    </nav>
+    <router-outlet></router-outlet>
+  </xmp>
+
+  <xmp>
+    $nav-background-color: #f62f5e;
+    $nav-font: "Montserrat", sans-serif;
+    $nav-font-size: 15px;
+    $nav-font-weight: 700;
+    $nav-font-color: #ffffff;
+
+    .navbar {
+    background-color: $nav-background-color;
+
+    a {
+    color: $nav-font-color;
+    font-weight: $nav-font-weight;
+    font-size: $nav-font-size;
+    font-family: $nav-font;
+    }
+
+    .navbar-brand {
+    font-size: 24px;
+    }
+
+    }
+
+    .nav-width {
+    width: 27rem;
+    }
+    .navbar-toggle-icon {
+    color: black !important;
+    }
+
+    .search-icon {
+    top: 0.6rem;
+    left: 1.5rem;
+    }
+    .search-close {
+    margin-left: -20px;
+    align-items: center;
+    }
+
+    #search-container input {
+    /* // z-index: 1; */
+    padding-left: 2.5rem;
+    font-weight: 600;
+    }
+    .text-stylish {
+    color: red;
+    stroke: black;
+    stroke-width: 20px;
+    -webkit-text-stroke-width: 20px;
+    }
+
+    #search-container .bg-transparent {
+    background-color: rgba(#ffffff, .20) !important;
+    }
+    input[type="search" i]::-webkit-search-cancel-button {
+    display: none;
+    }
+    input[type="search" i]::placeholder {
+    font-weight: 600;
+    align-items: center;
+    color: white;
+    }
+
+    @media (min-width: 300px) and (max-width: 767px) {
+    #brand {
+    padding-left: 0.8rem !important;
+    }
+
+    #navbarItem {
+    width: 1rem !important;
+    }
+
+    .nav-width {
+    width: 10rem;
+    }
+    }
+
+  </xmp>
+
+  <xmp>
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
+})
+export class NavbarComponent implements OnInit {
+
+  public isMenuCollapsed = true;
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+  </xmp>
+
+  </article>
+
+  </section>
+  <section id="bootstrap-explained">
+    <div>
+      <header>XXX</header>
+      <article></article>
+    </div>
+  </section>
+  <section id="conclusion">
+    <div>
+      <header>XXX</header>
+      <article></article>
+    </div>
+  </section>
   </div>
 </body>
 

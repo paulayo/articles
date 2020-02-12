@@ -13,7 +13,7 @@
 }
 .terminal {
   position: relative;
-  width: 80%;
+  width: 100%;
   max-width: 600px;
   border-radius: 6px;
   padding-top: 45px;
@@ -23,7 +23,7 @@
   text-align: left;
 }
 
-.terminal::before {
+.terminal::before{
   content: "\2022 \2022 \2022";
   position: absolute;
   top: 0;
@@ -38,7 +38,7 @@
   text-indent: 4px;
 }
 
-.terminal pre {
+.terminal pre,xmp {
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
   color: white;
   padding: 0 1rem 1rem;
@@ -72,4 +72,19 @@ a:hover {
     line-height: 24px;
     border-color: #EA8600;
 
+}
+#code { 
+  width: 100%;
+}
+
+xmp { 
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 6px;
+  padding-top: 45px;
+  margin-top: 8px;
+  overflow: scroll;
+  background-color: rgb(15, 15, 16);
+  text-align: left;
 }
